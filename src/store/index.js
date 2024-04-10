@@ -55,7 +55,16 @@ const store = createStore({
     },
     clearCart(state) {
       state.cart = [];
-    }
+    },
+    incrementQuantity(state, index) {
+      state.cart[index].quantity++;
+    },
+    decrementQuantity(state, index) {
+      // Check if the quantity is already 1, if so, do not decrement further
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity--;
+      }
+    },
   },
   actions: {
     purchaseItem({ commit }, item) {
