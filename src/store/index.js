@@ -41,6 +41,7 @@ const store = createStore({
     removeFromCart(state, index) {
       state.cart.splice(index, 1);
     },
+   
     updateAuthenticationStatus(state, status) {
       state.isAuthenticated = status;
     },
@@ -53,10 +54,6 @@ const store = createStore({
         state.users[userIndex].status = newStatus;
       }
     },
-    clearCart(state) {
-      state.cart = [];
-    },
-<<<<<<< HEAD
     incrementQuantity(state, index) {
       state.cart[index].quantity++;
     },
@@ -65,28 +62,11 @@ const store = createStore({
       if (state.cart[index].quantity > 1) {
         state.cart[index].quantity--;
       }
-    },
-=======
-    increaseQuantity(state, index) {
-      state.cart[index].quantity++;
-    },
-    decreaseQuantity(state, index) {
-      if (state.cart[index].quantity > 1) {
-        state.cart[index].quantity--;
-      }
     }
->>>>>>> 84776e1fbe99eac0fbab5d2197e9952a377c4a67
   },
   actions: {
-    purchaseItem({ commit }, item) {
-      console.log(`Purchased ${item.title}`);
-      commit('removeFromCart', item);
-    },
-    purchaseAll({ commit, state }) {
-      state.cart.forEach(item => {
-        console.log(`Purchased ${item.title}`);
-      });
-      commit('clearCart');
+    purchase() {
+      // Action to handle purchase
     },
     authenticate({ commit, state }, credentials) {
       const user = state.users.find(user => user.username === credentials.username && user.password === credentials.password);
@@ -96,6 +76,7 @@ const store = createStore({
       }
     },
     changeUserStatus({ commit }, { userId, newStatus }) {
+      // Action to change user status
       commit('updateUserStatus', { userId, newStatus });
     }
   },
