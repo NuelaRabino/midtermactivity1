@@ -15,22 +15,29 @@ const store = createStore({
         { id: 8, title: 'Romeo and Juliet', price: 300 },
         { id: 9, title: 'Java for Beginners', price: 800 },
         { id: 10, title: 'English Book for Grade 1', price: 150 },
-        // Add more books here
       ],
+      searchQuery: '', // Initialize search query
       cart: [],
       isAuthenticated: false,
       user: null,
       users: [
-        { id: 1, name: 'Administrator', username: 'administrator', password: 'admin123', status: 'verified' },
-        { id: 2, name: 'Nuela Rabino', username: 'nrabino', password: 'nrabino123', status: 'verified' },
+        { id: 1, name: 'Administrator', username: 'admin', password: 'admin123', status: 'verified' },
+        { id: 2, name: 'Raven San Juan', username: 'reben', password: 'rebenreben', status: 'verified' },
         { id: 3, name: 'Harvey Gana', username: 'hgana', password: 'hgana123', status: 'for_verification' }
-        // Add more users here
       ]
     }
   },
   mutations: {
+    setSearchQuery(state, query) {
+      state.searchQuery = query;
+    },
     addToCart(state, book) {
-      state.cart.push(book)
+      const existingItem = state.cart.find(item => item.id === book.id);
+      if (existingItem) {
+        existingItem.quantity++; // If item exists, increase quantity
+      } else {
+        state.cart.push({ ...book, quantity: 1 }); // If item doesn't exist, add it to cart with quantity 1
+      }
     },
     removeFromCart(state, index) {
       state.cart.splice(index, 1)
@@ -50,8 +57,7 @@ const store = createStore({
   },
   actions: {
     purchase() {
-      // Handle purchase transactions asynchronously
-      // Example: Here you can simulate a purchase by updating inventory, deducting amount from user's account, etc.
+      
     },
     authenticate({ commit, state }, credentials) {
       const user = state.users.find(user => user.username === credentials.username && user.password === credentials.password)
@@ -66,9 +72,17 @@ const store = createStore({
     }
   },
   getters: {
+    filteredBooks(state) {
+      if (state.searchQuery.trim() === '') {
+        return []; // Return an empty array if search query is empty
+      }
+      return state.books.filter(book =>
+        book.title.toLowerCase().includes(state.searchQuery.toLowerCase())
+      );
+    },
     availableBooks: state => state.books,
     cartItems: state => state.cart,
-    totalPrice: state => state.cart.reduce((total, item) => total + item.price, 0),
+    totalPrice: state => state.cart.reduce((total, item) => total + (item.price * item.quantity), 0),
     isAuthenticated: state => state.isAuthenticated,
     user: state => state.user,
     userAccounts: state => state.users
@@ -76,3 +90,4 @@ const store = createStore({
 })
 
 export default store
+
