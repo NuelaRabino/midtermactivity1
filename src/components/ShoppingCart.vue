@@ -33,6 +33,7 @@
     <p class="text-xl font-bold mt-4">Total: ₱{{ totalPrice }}</p>
     <div class="mt-4">
       <button @click="confirmPurchaseAll"
+        :disabled="cartItems.length === 0"
         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Purchase All</button>
     </div>
   </div>
@@ -116,5 +117,3 @@ export default {
   }
 }
 </script>
-
-
