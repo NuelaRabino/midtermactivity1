@@ -56,6 +56,7 @@ const store = createStore({
     clearCart(state) {
       state.cart = [];
     },
+<<<<<<< HEAD
     incrementQuantity(state, index) {
       state.cart[index].quantity++;
     },
@@ -65,17 +66,23 @@ const store = createStore({
         state.cart[index].quantity--;
       }
     },
+=======
+    increaseQuantity(state, index) {
+      state.cart[index].quantity++;
+    },
+    decreaseQuantity(state, index) {
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity--;
+      }
+    }
+>>>>>>> 84776e1fbe99eac0fbab5d2197e9952a377c4a67
   },
   actions: {
     purchaseItem({ commit }, item) {
-      // In a real scenario, you would perform an API call to make the purchase
-      // For demonstration purposes, we'll simply log the purchase
       console.log(`Purchased ${item.title}`);
       commit('removeFromCart', item);
     },
     purchaseAll({ commit, state }) {
-      // In a real scenario, you would perform an API call to make the purchase
-      // For demonstration purposes, we'll simply log the purchase
       state.cart.forEach(item => {
         console.log(`Purchased ${item.title}`);
       });

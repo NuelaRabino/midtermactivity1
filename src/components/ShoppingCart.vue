@@ -15,9 +15,21 @@
           <tr v-for="(item, index) in cartItems" :key="index" class="border-b border-gray-300">
             <td class="px-4 py-2">{{ item.title }}</td>
             <td class="px-4 py-2">
+<<<<<<< HEAD
               <button @click="decrementQuantity(index)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">-</button>
               <span class="px-2">{{ item.quantity }}</span>
               <button @click="incrementQuantity(index)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">+</button>
+=======
+              <div class="flex items-center">
+                <button @click="decreaseQuantity(index)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-l">
+                  -
+                </button>
+                <span class="px-2">{{ item.quantity }}</span>
+                <button @click="increaseQuantity(index)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-r">
+                  +
+                </button>
+              </div>
+>>>>>>> 84776e1fbe99eac0fbab5d2197e9952a377c4a67
             </td>
             <td class="px-4 py-2">₱{{ item.price }}</td>
             <td class="px-4 py-2">
@@ -43,6 +55,7 @@ export default {
     ...mapGetters(['cartItems', 'totalPrice'])
   },
   methods: {
+<<<<<<< HEAD
     ...mapMutations(['removeFromCart', 'incrementQuantity', 'decrementQuantity']),
     ...mapActions(['purchaseAll']),
     async confirmPurchaseAll() {
@@ -100,6 +113,10 @@ export default {
     calculateTotalPrice() {
       // Calculate total price
     }
+=======
+    ...mapMutations(['removeFromCart', 'increaseQuantity', 'decreaseQuantity']),
+    ...mapActions(['purchaseAll']),
+>>>>>>> 84776e1fbe99eac0fbab5d2197e9952a377c4a67
   }
 }
 </script>
