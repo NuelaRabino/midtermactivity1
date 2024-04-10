@@ -14,7 +14,7 @@
           <ShoppingCart v-if="user.status === 'verified'" />
         </template>
         <p v-else>Please wait for verification to access the shopping cart.</p>
-        <AdminPanel v-if="user.username === 'administrator'" />
+        <AdminPanel v-if="user.username === 'admin'" />
         <button @click="logout">Log Out</button> <!-- Log out button for all users -->
       </div>
     </template>
@@ -51,13 +51,4 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
