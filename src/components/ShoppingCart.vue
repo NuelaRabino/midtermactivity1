@@ -14,7 +14,17 @@
         <tbody>
           <tr v-for="(item, index) in cartItems" :key="index" class="border-b border-gray-300">
             <td class="px-4 py-2">{{ item.title }}</td>
-            <td class="px-4 py-2">{{ item.quantity }}</td>
+            <td class="px-4 py-2">
+              <div class="flex items-center">
+                <button @click="decreaseQuantity(index)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-l">
+                  -
+                </button>
+                <span class="px-2">{{ item.quantity }}</span>
+                <button @click="increaseQuantity(index)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-r">
+                  +
+                </button>
+              </div>
+            </td>
             <td class="px-4 py-2">₱{{ item.price }}</td>
             <td class="px-4 py-2">
               <button @click="removeFromCart(index)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Remove</button>
@@ -38,8 +48,8 @@ export default {
     ...mapGetters(['cartItems', 'totalPrice'])
   },
   methods: {
-    ...mapMutations(['removeFromCart']),
-    ...mapActions(['purchaseAll'])
+    ...mapMutations(['removeFromCart', 'increaseQuantity', 'decreaseQuantity']),
+    ...mapActions(['purchaseAll']),
   }
 }
 </script>

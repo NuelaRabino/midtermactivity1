@@ -55,18 +55,22 @@ const store = createStore({
     },
     clearCart(state) {
       state.cart = [];
+    },
+    increaseQuantity(state, index) {
+      state.cart[index].quantity++;
+    },
+    decreaseQuantity(state, index) {
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity--;
+      }
     }
   },
   actions: {
     purchaseItem({ commit }, item) {
-      // In a real scenario, you would perform an API call to make the purchase
-      // For demonstration purposes, we'll simply log the purchase
       console.log(`Purchased ${item.title}`);
       commit('removeFromCart', item);
     },
     purchaseAll({ commit, state }) {
-      // In a real scenario, you would perform an API call to make the purchase
-      // For demonstration purposes, we'll simply log the purchase
       state.cart.forEach(item => {
         console.log(`Purchased ${item.title}`);
       });
