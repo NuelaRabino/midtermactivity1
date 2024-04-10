@@ -52,11 +52,25 @@ const store = createStore({
       if (userIndex !== -1) {
         state.users[userIndex].status = newStatus;
       }
+    },
+    clearCart(state) {
+      state.cart = [];
     }
   },
   actions: {
-    purchase() {
-      // Action to handle purchase
+    purchaseItem({ commit }, item) {
+      // In a real scenario, you would perform an API call to make the purchase
+      // For demonstration purposes, we'll simply log the purchase
+      console.log(`Purchased ${item.title}`);
+      commit('removeFromCart', item);
+    },
+    purchaseAll({ commit, state }) {
+      // In a real scenario, you would perform an API call to make the purchase
+      // For demonstration purposes, we'll simply log the purchase
+      state.cart.forEach(item => {
+        console.log(`Purchased ${item.title}`);
+      });
+      commit('clearCart');
     },
     authenticate({ commit, state }, credentials) {
       const user = state.users.find(user => user.username === credentials.username && user.password === credentials.password);
@@ -66,7 +80,6 @@ const store = createStore({
       }
     },
     changeUserStatus({ commit }, { userId, newStatus }) {
-      // Action to change user status
       commit('updateUserStatus', { userId, newStatus });
     }
   },

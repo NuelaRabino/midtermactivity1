@@ -16,24 +16,30 @@
             <td class="px-4 py-2">{{ item.title }}</td>
             <td class="px-4 py-2">{{ item.quantity }}</td>
             <td class="px-4 py-2">₱{{ item.price }}</td>
-            <td class="px-4 py-2"><button @click="removeFromCart(index)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Remove</button></td>
+            <td class="px-4 py-2">
+              <button @click="removeFromCart(index)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Remove</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <p class="text-xl font-bold mt-4">Total: ₱{{ totalPrice }}</p>
+    <div class="mt-4">
+      <button @click="purchaseAll" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Purchase All</button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters(['cartItems', 'totalPrice'])
   },
   methods: {
-    ...mapMutations(['removeFromCart'])
+    ...mapMutations(['removeFromCart']),
+    ...mapActions(['purchaseAll'])
   }
 }
 </script>

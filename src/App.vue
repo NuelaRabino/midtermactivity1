@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-gray-100 min-h-screen flex flex-col justify-center items-center py-8">
     <router-view></router-view>
     <template v-if="!isAuthenticated">
-      <LoginForm />
+      <LoginForm class="mt-4" />
     </template>
     <template v-else>
-      <div>
-        <h2>Welcome, {{ user.name }}</h2>
-        <p>Status: {{ user.status }}</p>
+      <div class="max-w-xl w-full bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Welcome, {{ user.name }}</h2>
+        <p class="mb-4">Status: {{ user.status }}</p>
         <template v-if="user.status !== 'for_verification'">
           <BookList />
           <SearchBar />
           <ShoppingCart v-if="user.status === 'verified'" />
         </template>
-        <p v-else>Please wait for verification to access the shopping cart.</p>
+        <p v-else class="text-red-500 mb-4">Please wait for verification to access the shopping cart.</p>
         <AdminPanel v-if="user.username === 'admin'" />
-        <button @click="logout">Log Out</button> <!-- Log out button for all users -->
+        <button @click="logout" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">Log Out</button> <!-- Log out button for all users -->
       </div>
     </template>
   </div>
@@ -50,5 +50,3 @@ export default {
   }
 }
 </script>
-
-
