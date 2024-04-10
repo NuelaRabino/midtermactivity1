@@ -3,12 +3,12 @@
     <h2 class="login-title">Login</h2>
     <form @submit.prevent="login" class="login-form">
       <div class="form-group">
-        <label for="username">Username:</label>
-        <input id="username" type="text" v-model="username" required>
+        <label for="username" class="input-label">Username:</label>
+        <input id="username" type="text" v-model="username" required class="input-field">
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input id="password" type="password" v-model="password" required>
+        <label for="password" class="input-label">Password:</label>
+        <input id="password" type="password" v-model="password" required class="input-field">
       </div>
       <button type="submit" class="btn-login">Login</button>
     </form>
@@ -40,15 +40,16 @@ export default {
 .login-container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
+  padding: 40px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .login-title {
   text-align: center;
   margin-bottom: 20px;
+  color: #333;
 }
 
 .login-form {
@@ -60,12 +61,12 @@ export default {
   margin-bottom: 15px;
 }
 
-label {
+.input-label {
   font-weight: bold;
+  color: #333;
 }
 
-input[type="text"],
-input[type="password"] {
+.input-field {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -73,9 +74,9 @@ input[type="password"] {
   outline: none;
 }
 
-button[type="submit"] {
+.btn-login {
   padding: 10px 20px;
-  background-color: #009b22;
+  background: linear-gradient(to right, #009b22, #00b03e);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -83,7 +84,7 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #009b22;
+.btn-login:hover {
+  background: linear-gradient(to right, #007a18, #008d2d);
 }
 </style>

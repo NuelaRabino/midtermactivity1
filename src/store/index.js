@@ -1,5 +1,4 @@
-// store/index.js
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 const store = createStore({
   state() {
@@ -16,7 +15,7 @@ const store = createStore({
         { id: 9, title: 'Java for Beginners', price: 800 },
         { id: 10, title: 'English Book for Grade 1', price: 150 },
       ],
-      searchQuery: '', // Initialize search query
+      searchQuery: '',
       cart: [],
       isAuthenticated: false,
       user: null,
@@ -25,7 +24,7 @@ const store = createStore({
         { id: 2, name: 'Raven San Juan', username: 'reben', password: 'rebenreben', status: 'verified' },
         { id: 3, name: 'Harvey Gana', username: 'hgana', password: 'hgana123', status: 'for_verification' }
       ]
-    }
+    };
   },
   mutations: {
     setSearchQuery(state, query) {
@@ -34,47 +33,47 @@ const store = createStore({
     addToCart(state, book) {
       const existingItem = state.cart.find(item => item.id === book.id);
       if (existingItem) {
-        existingItem.quantity++; // If item exists, increase quantity
+        existingItem.quantity++;
       } else {
-        state.cart.push({ ...book, quantity: 1 }); // If item doesn't exist, add it to cart with quantity 1
+        state.cart.push({ ...book, quantity: 1 });
       }
     },
     removeFromCart(state, index) {
-      state.cart.splice(index, 1)
+      state.cart.splice(index, 1);
     },
     updateAuthenticationStatus(state, status) {
-      state.isAuthenticated = status
+      state.isAuthenticated = status;
     },
     setUser(state, user) {
-      state.user = user
+      state.user = user;
     },
     updateUserStatus(state, { userId, newStatus }) {
-      const userIndex = state.users.findIndex(user => user.id === userId)
+      const userIndex = state.users.findIndex(user => user.id === userId);
       if (userIndex !== -1) {
-        state.users[userIndex].status = newStatus
+        state.users[userIndex].status = newStatus;
       }
     }
   },
   actions: {
     purchase() {
-      
+      // Action to handle purchase
     },
     authenticate({ commit, state }, credentials) {
-      const user = state.users.find(user => user.username === credentials.username && user.password === credentials.password)
+      const user = state.users.find(user => user.username === credentials.username && user.password === credentials.password);
       if (user) {
-        commit('updateAuthenticationStatus', true)
-        commit('setUser', user)
+        commit('updateAuthenticationStatus', true);
+        commit('setUser', user);
       }
     },
-    // Remove commit argument since it's not used
-    changeUserStatus() {
-      // Remove unused arguments from this action
+    changeUserStatus({ commit }, { userId, newStatus }) {
+      // Action to change user status
+      commit('updateUserStatus', { userId, newStatus });
     }
   },
   getters: {
     filteredBooks(state) {
       if (state.searchQuery.trim() === '') {
-        return []; // Return an empty array if search query is empty
+        return [];
       }
       return state.books.filter(book =>
         book.title.toLowerCase().includes(state.searchQuery.toLowerCase())
@@ -87,7 +86,6 @@ const store = createStore({
     user: state => state.user,
     userAccounts: state => state.users
   }
-})
+});
 
-export default store
-
+export default store;
