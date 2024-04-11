@@ -15,13 +15,16 @@
           <tr v-for="(item, index) in cartItems" :key="index" class="border-b border-gray-300">
             <td class="px-4 py-2">{{ item.title }}</td>
             <td class="px-4 py-2">
-              <button @click="decrementQuantity(index)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">-</button>
+              <button @click="decrementQuantity(index)"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">-</button>
               <span class="px-2">{{ item.quantity }}</span>
-              <button @click="incrementQuantity(index)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">+</button>
+              <button @click="incrementQuantity(index)"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded-md">+</button>
             </td>
             <td class="px-4 py-2">₱{{ item.price }}</td>
             <td class="px-4 py-2">
-              <button @click="confirmRemove(index)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Remove</button>
+              <button @click="confirmRemove(index)"
+                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Remove</button>
             </td>
           </tr>
         </tbody>
@@ -29,7 +32,8 @@
     </div>
     <p class="text-xl font-bold mt-4">Total: ₱{{ totalPrice }}</p>
     <div class="mt-4">
-      <button @click="confirmPurchaseAll" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Purchase All</button>
+      <button @click="confirmPurchaseAll"
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Purchase All</button>
     </div>
   </div>
 </template>
@@ -63,6 +67,14 @@ export default {
           'All items have been purchased.',
           'success'
         )
+        // Call the clearCart method after the purchase is confirmed
+        this.clearCart();
+      }
+    },
+    clearCart() {
+      // Remove all items from the cart
+      while (this.cartItems.length > 0) {
+    this.removeFromCart(this.cartItems[0]);
       }
     },
     increaseQuantity(index) {
