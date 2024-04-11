@@ -10,7 +10,7 @@
         <label for="password" class="input-label">Password:</label>
         <input id="password" type="password" v-model="password" required class="input-field">
       </div>
-      <button type="submit" class="btn-login">Login</button>
+      <center><button type="submit" class="btn-login">Login</button></center>
     </form>
   </div>
 </template>
@@ -82,6 +82,7 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  
 }
 
 .btn-login:hover {

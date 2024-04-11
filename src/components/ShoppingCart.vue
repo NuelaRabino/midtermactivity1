@@ -41,6 +41,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import Swal from 'sweetalert2'
+import '@/style.css';
 
 export default {
   computed: {
@@ -115,3 +116,5 @@ export default {
   }
 }
 </script>
+
+
